@@ -21,6 +21,4 @@ public class PlanePointDetector : MonoBehaviour
                 OnPointDetected?.Invoke(hit.point);
             }
     }
-    
-    
 }
