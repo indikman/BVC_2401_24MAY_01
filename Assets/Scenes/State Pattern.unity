@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4ae5c2a75e34874b00dbcca3e99902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castOriginOffset: {x: 0, y: 0, z: 0}
+  castOriginOffset: {x: 0, y: 0, z: 2.05}
   castDistance: 2.89
   castRadius: 0.53
   detectionLayerMask:

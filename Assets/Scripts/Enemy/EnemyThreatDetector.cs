@@ -32,8 +32,14 @@ public class EnemyThreatDetector : MonoBehaviour
     {
         if(!_isDetecting) return;
 
+        Matrix4x4 mat = new Matrix4x4();
+        var startingPos = transform.position +
+                          transform.forward * castOriginOffset.z +
+                          transform.right * castOriginOffset.x + 
+                          transform.up * castOriginOffset.y;
+        
         if (Physics.SphereCast(
-                transform.position + castOriginOffset, 
+                startingPos, 
                 castRadius, 
                 transform.forward, 
                 out RaycastHit hit,
@@ -55,8 +61,12 @@ public class EnemyThreatDetector : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position + castOriginOffset, castRadius);
-        Gizmos.DrawWireSphere(transform.position + castOriginOffset + castDistance * transform.forward, castRadius);
-        Gizmos.DrawLine(transform.position+castOriginOffset, transform.position + castOriginOffset + castDistance * transform.forward);
+
+        var startingPos = transform.position + transform.forward * castOriginOffset.z +
+                          transform.right * castOriginOffset.x + transform.up * castOriginOffset.y;
+        
+        Gizmos.DrawWireSphere(startingPos, castRadius);
+        Gizmos.DrawWireSphere(startingPos + castDistance * transform.forward, castRadius);
+        Gizmos.DrawLine(startingPos, startingPos + castDistance * transform.forward);
     }
 }
