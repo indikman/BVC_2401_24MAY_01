@@ -17,7 +17,7 @@ public class EnemyThreatDetector : MonoBehaviour
     public void StartDetecting(string tag, float cast_distance=0, float cast_radius=0)
     {
         _isDetecting = true;
-        this.tag = tag;
+        _detectionTag = tag;
 
         castDistance = cast_distance == 0 ? castDistance : cast_distance;
         castRadius = cast_radius == 0? castRadius : cast_radius;
@@ -31,8 +31,6 @@ public class EnemyThreatDetector : MonoBehaviour
     private void Detect()
     {
         if(!_isDetecting) return;
-
-        Matrix4x4 mat = new Matrix4x4();
         var startingPos = transform.position +
                           transform.forward * castOriginOffset.z +
                           transform.right * castOriginOffset.x + 
@@ -46,7 +44,7 @@ public class EnemyThreatDetector : MonoBehaviour
                 castDistance,
                 detectionLayerMask))
         {
-            if (hit.transform.CompareTag(tag))
+            if (hit.transform.CompareTag(_detectionTag))
             {
                 onThreatDetected?.Invoke(hit.transform.gameObject);
             }
@@ -60,7 +58,7 @@ public class EnemyThreatDetector : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
 
         var startingPos = transform.position + transform.forward * castOriginOffset.z +
                           transform.right * castOriginOffset.x + transform.up * castOriginOffset.y;

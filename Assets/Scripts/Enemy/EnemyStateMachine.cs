@@ -7,8 +7,12 @@ public class EnemyStateMachine : MonoBehaviour
 {
     private IState _currentState;
 
-    public EnemyPatrolState patrolState;
-    public EnemyAlertState alertState;
+    public EnemyPatrolState patrolState { get; private set; }
+    public EnemyAlertState alertState { get; private set; }
+
+    public EnemyMovement enemyMovemet { get; private set; }
+    public EnemyThreatDetector enemyThreatDetector  { get; private set; }
+    public Tooltip toolTip { get; private set; }
 
     public void SetState(IState newState)
     {
@@ -21,6 +25,11 @@ public class EnemyStateMachine : MonoBehaviour
     {
         patrolState = new EnemyPatrolState(this);
         alertState = new EnemyAlertState(this);
+
+        enemyMovemet = GetComponent<EnemyMovement>();
+        enemyThreatDetector = GetComponent<EnemyThreatDetector>();
+        toolTip = GetComponent<Tooltip>();
+        
         
         //Set Default state
         SetState(patrolState);
