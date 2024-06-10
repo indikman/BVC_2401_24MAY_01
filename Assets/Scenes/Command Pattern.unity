@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 808896769}
   - component: {fileID: 808896768}
   - component: {fileID: 808896773}
+  - component: {fileID: 808896774}
   m_Layer: 7
   m_Name: Character
   m_TagString: Player
@@ -834,9 +835,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 808896767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb35fcff2d0094373ab65a5e7f886c9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 45a04a7663ffd482bb6391929427d90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  txtCurrentStrategy: {fileID: 544185418}
+--- !u!114 &808896774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808896767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b6300974e9a4fbbb267dd11d63ba7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToBuild: {fileID: 3870093623209805909, guid: ec51d659e6f7e4c128166ac2958633c5,
+    type: 3}
 --- !u!1 &902021911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,7 +1397,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1533612820}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 808896773}
+        m_TargetAssemblyTypeName: Commander, Assembly-CSharp
+        m_MethodName: SetBuildStrategy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1533612820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1640,7 +1668,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1614209124}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 808896773}
+        m_TargetAssemblyTypeName: Commander, Assembly-CSharp
+        m_MethodName: SetMoveStrategy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1614209124
 MonoBehaviour:
   m_ObjectHideFlags: 0
