@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using com.indiprogramming.interfaces;
 
 public class MoveCommandStrategy : ICommandStrategy
 {

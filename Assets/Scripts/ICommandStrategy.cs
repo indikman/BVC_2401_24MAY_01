@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public interface ICommandStrategy
+namespace  com.indiprogramming.interfaces
 {
-    Command CreateCommand(Vector3 position);
+    public interface ICommandStrategy
+    {
+        Command CreateCommand(Vector3 position);
+    }
 }

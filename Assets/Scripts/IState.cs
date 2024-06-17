@@ -1,6 +1,11 @@
-public interface IState
+namespace com.indiprogramming.interfaces
 {
-    public void EnterState();
-    public void ExitState();
-    public void UpdateState();
+    public interface IState
+    {
+        public void EnterState();
+        public void ExitState();
+        public void UpdateState();
+    } 
 }
+
+
