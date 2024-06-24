@@ -15,7 +15,7 @@ public class EnemyPatrolState : IState
         _stateMachine.enemyMovemet.SetPatrolling(true);
         
         //Be in the lookout for the player
-        _stateMachine.enemyThreatDetector.StartDetecting("Player", 2, 0.5f);
+        _stateMachine.enemyThreatDetector.SetDetection(true);
         _stateMachine.enemyThreatDetector.onThreatDetected += ThreatDetected;
 
         _stateMachine.toolTip.SetTooltipText("Minding my business!");
@@ -28,7 +28,7 @@ public class EnemyPatrolState : IState
         _stateMachine.enemyMovemet.SetPatrolling(false);
         
         //Stop looking for threats for a moment
-        _stateMachine.enemyThreatDetector.StopDetecting();
+        _stateMachine.enemyThreatDetector.SetDetection(false);
         _stateMachine.enemyThreatDetector.onThreatDetected -= ThreatDetected;
     }
 
@@ -39,7 +39,8 @@ public class EnemyPatrolState : IState
 
     private void ThreatDetected(GameObject threat)
     {
-        Debug.Log("Oh, I saw an enemy!! I am now switching to Alert!!!!");
+        Debug.Log("Oh, I saw the player!! I am now switching to Alert!!!!");
+        _stateMachine.CurrentThreat = threat;
         _stateMachine.SetState(_stateMachine.alertState);
     }
 }

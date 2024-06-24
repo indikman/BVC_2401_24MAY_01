@@ -1,26 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class InputManager : MonoBehaviour
+[CreateAssetMenu(menuName = "Indika/InputManager", fileName = "InputManager")]
+public class InputManager : ScriptableObject
 {
     // Player will listen to this
     public event Action<Vector2> onMove;
-
+    private PlayerInput _playerInput;
+    
     private void OnEnable()
     {
         SetupInputs();
     }
-    
+
+    private void OnDisable()
+    {
+        DisableInputs();
+    }
+
     private void SetupInputs()
     {
-        PlayerInput playerInput = new PlayerInput();
+        _playerInput = new PlayerInput();
+        _playerInput.Player.Move.performed += OnMove;
+        _playerInput.Enable();
+    }
 
-        playerInput.Player.Move.performed += OnMove;
+    private void DisableInputs()
+    {
+        if(_playerInput == null) return;
         
-        playerInput.Enable();
+        _playerInput.Player.Move.performed -= OnMove;
+        _playerInput.Disable();
+        _playerInput = null;
     }
 
     private void OnMove(InputAction.CallbackContext context)

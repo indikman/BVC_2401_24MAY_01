@@ -6,65 +6,75 @@ using UnityEngine;
 public class EnemyThreatDetector : MonoBehaviour
 {
     public event Action<GameObject> onThreatDetected;
-    [SerializeField] private Vector3 castOriginOffset;
-    [SerializeField] private float castDistance;
-    [SerializeField] private float castRadius;
+    
+    [SerializeField] private float viewRadius;
+    
+    [Range(0,360)]
+    [SerializeField] private float viewAngle;
+    
     [SerializeField] private LayerMask detectionLayerMask;
+    [SerializeField] private LayerMask obstacleLayerMask;
+
+    private List<Transform> visibleThreats = new List<Transform>();
     
     private bool _isDetecting = false;
-    private string _detectionTag;
+    private Ray[] _rays;
 
-    public void StartDetecting(string tag, float cast_distance=0, float cast_radius=0)
+    public void SetDetection(bool value)
     {
-        _isDetecting = true;
-        _detectionTag = tag;
-
-        castDistance = cast_distance == 0 ? castDistance : cast_distance;
-        castRadius = cast_radius == 0? castRadius : cast_radius;
-    }
-
-    public void StopDetecting()
-    {
-        _isDetecting = false;
+        _isDetecting = value;
     }
 
     private void Detect()
     {
         if(!_isDetecting) return;
-        var startingPos = transform.position +
-                          transform.forward * castOriginOffset.z +
-                          transform.right * castOriginOffset.x + 
-                          transform.up * castOriginOffset.y;
         
-        if (Physics.SphereCast(
-                startingPos, 
-                castRadius, 
-                transform.forward, 
-                out RaycastHit hit,
-                castDistance,
-                detectionLayerMask))
+        visibleThreats.Clear();
+        
+        // Grab all the colliders within the area of the enemy
+        var targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, detectionLayerMask);
+
+        for (var i = 0; i < targetsInViewRadius.Length; i++)
         {
-            if (hit.transform.CompareTag(_detectionTag))
+            var target = targetsInViewRadius[i].transform;
+            var directionToTarget = (target.position - transform.position).normalized;
+            
+            //Check if the direction is within the view Angle
+            if (Vector3.Angle(transform.forward, directionToTarget) < viewAngle / 2)
             {
-                onThreatDetected?.Invoke(hit.transform.gameObject);
+                var distanceToTarget = Vector3.Distance(transform.position, target.position);
+                
+                // cast a ray to check line of sight
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayerMask))
+                {
+                    visibleThreats.Add(target);
+                }
             }
         }
     }
     
-    void Update()
+    void FixedUpdate()
     {
         Detect();
     }
 
+    private void Update()
+    {
+        if (visibleThreats.Count == 0) return;
+        foreach (var target in visibleThreats)
+        {
+            onThreatDetected?.Invoke(target.gameObject);
+        }
+    }
+
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-
-        var startingPos = transform.position + transform.forward * castOriginOffset.z +
-                          transform.right * castOriginOffset.x + transform.up * castOriginOffset.y;
+        if (visibleThreats.Count == 0) return;
         
-        Gizmos.DrawWireSphere(startingPos, castRadius);
-        Gizmos.DrawWireSphere(startingPos + castDistance * transform.forward, castRadius);
-        Gizmos.DrawLine(startingPos, startingPos + castDistance * transform.forward);
+        Gizmos.color = Color.green;
+        foreach (var target in visibleThreats)
+        {
+            Gizmos.DrawLine(transform.position, target.position);
+        }
     }
 }
