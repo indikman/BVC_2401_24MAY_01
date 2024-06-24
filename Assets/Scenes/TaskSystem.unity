@@ -957,7 +957,9 @@ MonoBehaviour:
   tasksCompleted: {fileID: 1024214413}
   tasksAvailable: {fileID: 912797973}
   tasks:
+  - {fileID: 11400000, guid: 259a7372507594cbc89486f9fb470da7, type: 2}
   - {fileID: 11400000, guid: e9bb07d5681e04037a976429a58aa7e6, type: 2}
+  - {fileID: 11400000, guid: 3642b4c6005854ba2a6c5df89d9d854b, type: 2}
 --- !u!114 &1651613584
 MonoBehaviour:
   m_ObjectHideFlags: 0
