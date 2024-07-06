@@ -29,7 +29,7 @@ public class EnemyFollowState : IState
         _stateMachine.enemyThreatDetector.SetDetection(true);
         _stateMachine.enemyThreatDetector.onThreatDetected += FollowThreat;
         
-        _stateMachine.toolTip.SetTooltipText("I am follow yah!");
+        _stateMachine.toolTip.SetTooltipText("I am following you!");
     }
 
     public void ExitState()
@@ -40,6 +40,7 @@ public class EnemyFollowState : IState
     public void UpdateState()
     {
         _cooldownTimer.UpdateTimer();
+        CheckThreatDistance();
     }
 
     private void EnemyCoolDown()
@@ -57,5 +58,21 @@ public class EnemyFollowState : IState
         _stateMachine.CurrentThreat = threat;
         _cooldownTimer.StartTimer(coolDownTime);
         _stateMachine.enemyMovemet.Move(threat.transform.position);
+    }
+
+    private void CheckThreatDistance()
+    {
+        var distanceToThreat = Vector3.Distance(_stateMachine.CurrentThreat.transform.position,
+            _stateMachine.transform.position);
+
+        // if the enemy is close enough to the player, go to the attack state
+        if (distanceToThreat <= 2.0f)
+        {
+            // stop following the player
+            _stateMachine.enemyMovemet.Move(_stateMachine.transform.position);
+            
+            // go to the attack state
+            _stateMachine.SetState(_stateMachine.attackState);
+        }
     }
 }

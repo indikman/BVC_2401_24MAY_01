@@ -14,6 +14,7 @@ public class EnemyStateMachine : MonoBehaviour
     public EnemyPatrolState patrolState { get; private set; }
     public EnemyAlertState alertState { get; private set; }
     public EnemyFollowState followState { get; private set; }
+    public EnemyAttackState attackState { get; private set; }
     
     
     public EnemyMovement enemyMovemet { get; private set; }
@@ -35,6 +36,7 @@ public class EnemyStateMachine : MonoBehaviour
         patrolState = new EnemyPatrolState(this);
         alertState = new EnemyAlertState(this);
         followState = new EnemyFollowState(this);
+        attackState = new EnemyAttackState(this);
 
         enemyMovemet = GetComponent<EnemyMovement>();
         enemyThreatDetector = GetComponent<EnemyThreatDetector>();
