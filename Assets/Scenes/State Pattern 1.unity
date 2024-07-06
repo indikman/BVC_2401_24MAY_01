@@ -602,6 +602,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2511294169020277941, guid: c2794e30ad2664239bce10615c26e3f6,
+        type: 3}
+      propertyPath: viewSpectrumIterator
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4109231283783097582, guid: c2794e30ad2664239bce10615c26e3f6,
         type: 3}
       propertyPath: patrolPoints.Array.data[0]
@@ -617,6 +622,12 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[2]
       value: 
       objectReference: {fileID: 1375859688}
+    - target: {fileID: 5196756167750223090, guid: c2794e30ad2664239bce10615c26e3f6,
+        type: 3}
+      propertyPath: enemyAIParamSO
+      value: 
+      objectReference: {fileID: 11400000, guid: f6ba9124af5064ebea17a9b92e7b3ebf,
+        type: 2}
     - target: {fileID: 6650586349646347431, guid: c2794e30ad2664239bce10615c26e3f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1568,6 +1579,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2511294169020277941, guid: c2794e30ad2664239bce10615c26e3f6,
+        type: 3}
+      propertyPath: viewSpectrumIterator
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4109231283783097582, guid: c2794e30ad2664239bce10615c26e3f6,
         type: 3}
       propertyPath: patrolPoints.Array.data[0]
@@ -1583,6 +1599,12 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[2]
       value: 
       objectReference: {fileID: 1449608078}
+    - target: {fileID: 5196756167750223090, guid: c2794e30ad2664239bce10615c26e3f6,
+        type: 3}
+      propertyPath: enemyAIParamSO
+      value: 
+      objectReference: {fileID: 11400000, guid: f6ba9124af5064ebea17a9b92e7b3ebf,
+        type: 2}
     - target: {fileID: 6650586349646347431, guid: c2794e30ad2664239bce10615c26e3f6,
         type: 3}
       propertyPath: m_LocalPosition.x

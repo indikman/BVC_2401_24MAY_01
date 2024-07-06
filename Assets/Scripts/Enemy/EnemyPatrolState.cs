@@ -15,7 +15,11 @@ public class EnemyPatrolState : IState
         _stateMachine.enemyMovemet.SetPatrolling(true);
         
         //Be in the lookout for the player
-        _stateMachine.enemyThreatDetector.SetDetection(true);
+        _stateMachine.enemyThreatDetector.SetDetection(
+            true, 
+            _stateMachine.enemyAIParamSO.viewRadiusPatrol, 
+            _stateMachine.enemyAIParamSO.viewAnglePatrol);
+        
         _stateMachine.enemyThreatDetector.onThreatDetected += ThreatDetected;
 
         _stateMachine.toolTip.SetTooltipText("Minding my business!");

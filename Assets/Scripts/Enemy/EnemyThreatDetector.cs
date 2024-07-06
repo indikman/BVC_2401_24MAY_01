@@ -15,14 +15,17 @@ public class EnemyThreatDetector : MonoBehaviour
     [SerializeField] private LayerMask detectionLayerMask;
     [SerializeField] private LayerMask obstacleLayerMask;
 
+
     private List<Transform> visibleThreats = new List<Transform>();
     
     private bool _isDetecting = false;
     private Ray[] _rays;
 
-    public void SetDetection(bool value)
+    public void SetDetection(bool value, float viewradius=10.0f, float viewangle=70.0f)
     {
         _isDetecting = value;
+        viewRadius = viewradius;
+        viewAngle = viewangle;
     }
 
     private void Detect()
@@ -67,14 +70,35 @@ public class EnemyThreatDetector : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    
+    [SerializeField] private float viewSpectrumIterator=5;
+    private void OnDrawGizmosSelected()
     {
-        if (visibleThreats.Count == 0) return;
+        //if (visibleThreats.Count == 0) return;
         
         Gizmos.color = Color.green;
         foreach (var target in visibleThreats)
         {
             Gizmos.DrawLine(transform.position, target.position);
         }
+        
+        Gizmos.color = Color.yellow;
+        float halfFOV = viewAngle / 2.0f;
+
+        for (float i = -halfFOV; i < halfFOV; i+=viewSpectrumIterator)
+        {
+            Quaternion rayRot = Quaternion.AngleAxis( i, Vector3.up );
+            Vector3 rayDir = rayRot * transform.forward;
+            Gizmos.DrawRay( transform.position, rayDir * viewRadius );
+        }
+        
+        Gizmos.color = Color.red;
+        Quaternion leftRayRotation = Quaternion.AngleAxis( -halfFOV, Vector3.up );
+        Quaternion rightRayRotation = Quaternion.AngleAxis( halfFOV, Vector3.up );
+        Vector3 leftRayDirection = leftRayRotation * transform.forward;
+        Vector3 rightRayDirection = rightRayRotation * transform.forward;
+        Gizmos.DrawRay( transform.position, leftRayDirection * viewRadius );
+        Gizmos.DrawRay( transform.position, rightRayDirection * viewRadius );
+        
     }
 }

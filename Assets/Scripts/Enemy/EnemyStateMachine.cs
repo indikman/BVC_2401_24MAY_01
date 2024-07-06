@@ -8,6 +8,8 @@ public class EnemyStateMachine : MonoBehaviour
 {
     private IState _currentState;
 
+    public EnemyAIParamsSO enemyAIParamSO;
+
     /// <summary>
     /// STATES
     /// </summary>

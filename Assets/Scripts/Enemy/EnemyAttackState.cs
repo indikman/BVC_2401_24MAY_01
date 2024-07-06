@@ -15,6 +15,10 @@ public class EnemyAttackState : IState
     public void EnterState()
     {
         _stateMachine.toolTip.SetTooltipText("I am attacking you now!!!!");
+        _stateMachine.enemyThreatDetector.SetDetection(
+            true, 
+            _stateMachine.enemyAIParamSO.viewRadiusAttack, 
+            _stateMachine.enemyAIParamSO.viewAngleAttack);
     }
 
     public void ExitState()
@@ -33,7 +37,7 @@ public class EnemyAttackState : IState
             _stateMachine.transform.position);
 
         // if the enemy is away from the player, go to the follow state
-        if (distanceToThreat > 2.0f)
+        if (distanceToThreat > _stateMachine.enemyAIParamSO.attackDistance)
         {
             // go to the follow state
             _stateMachine.SetState(_stateMachine.followState);

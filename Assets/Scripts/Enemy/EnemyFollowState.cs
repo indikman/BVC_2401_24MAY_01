@@ -26,7 +26,10 @@ public class EnemyFollowState : IState
         _cooldownTimer.onTimerEnd += EnemyCoolDown;
         
         // start threat checking again
-        _stateMachine.enemyThreatDetector.SetDetection(true);
+        _stateMachine.enemyThreatDetector.SetDetection(
+            true, 
+            _stateMachine.enemyAIParamSO.viewRadiusFollow, 
+            _stateMachine.enemyAIParamSO.viewAngleFollow);
         _stateMachine.enemyThreatDetector.onThreatDetected += FollowThreat;
         
         _stateMachine.toolTip.SetTooltipText("I am following you!");
@@ -66,7 +69,7 @@ public class EnemyFollowState : IState
             _stateMachine.transform.position);
 
         // if the enemy is close enough to the player, go to the attack state
-        if (distanceToThreat <= 2.0f)
+        if (distanceToThreat <= _stateMachine.enemyAIParamSO.attackDistance)
         {
             // stop following the player
             _stateMachine.enemyMovemet.Move(_stateMachine.transform.position);
