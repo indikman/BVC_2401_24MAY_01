@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2623d9c026ab24ba2b479495489fb9f1, type: 3}
   m_Name: WoodenSword
   m_EditorClassIdentifier: 
-  weaponName: Blade of Ethereal Flames
-  weaponDescription: A mystical sword imbued with otherworldly fire, capable of burning
-    through any material and repelling dark magic.
-  sprite: {fileID: 1245362022, guid: 62d81f153264842ab9e85050beb9ed6c, type: 3}
-  damage: 20
-  strength: 80
-  reloadSpeed: 5
+  weaponName: Elderwood Blade
+  weaponDescription: ' A simple wooden sword crafted from ancient trees, more symbolic
+    than practical, used primarily for training and ceremonial purposes.'
+  sprite: {fileID: -1996665143, guid: 62d81f153264842ab9e85050beb9ed6c, type: 3}
+  damage: 5
+  strength: 10
+  reloadSpeed: 1
   attackSound: {fileID: 8300000, guid: f255f457ae86341d798f7996fb5ede5d, type: 3}
