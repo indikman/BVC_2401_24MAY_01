@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2623d9c026ab24ba2b479495489fb9f1, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: 
+  weaponName: Stormbreaker Axe
+  weaponDescription: ' A mighty axe imbued with the power of thunder, capable of
+    summoning lightning and cleaving through the toughest armor.'
+  sprite: {fileID: -149841835, guid: 62d81f153264842ab9e85050beb9ed6c, type: 3}
+  damage: 90
+  strength: 50
+  reloadSpeed: 3
+  attackSound: {fileID: 8300000, guid: adad9f5224ab748b7aabe42868ae4e94, type: 3}
